@@ -29,7 +29,7 @@ def transform_number(number):
 
 def read_file(filename):
     with open(filename, 'r') as file:
-        buffer = file.read().split(' ')
+        buffer = file.read().split()
         if len(buffer) == 0:
             return print(f'Файл {filename} пустой')
 
