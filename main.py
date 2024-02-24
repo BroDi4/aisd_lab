@@ -27,18 +27,22 @@ def transform_number(number):
     return result
 
 
-def read_file(filename):
+def read_file(filename, buffer_len):
     with open(filename, 'r') as file:
-        buffer = file.read().split()
-        if len(buffer) == 0:
+        buffer = file.read(buffer_len).split()
+
+        if not buffer:
             return print(f'Файл {filename} пустой')
 
-        for i in range(len(buffer)):
-            if is_correct_number(buffer[i]):
-                if (i + 1) % 2 != 0:
-                    print(f'{buffer[i]}: {transform_number(buffer[i])}')
-                else:
-                    print(buffer[i])
+        while buffer:
+            for i in range(len(buffer)):
+                if is_correct_number(buffer[i]):
+                    if (i + 1) % 2 != 0:
+                        print(f'{buffer[i]}: {transform_number(buffer[i])}')
+                    else:
+                        print(buffer[i])
+
+            buffer = file.read(buffer_len).split()
 
 
-read_file('numbers.txt')
+read_file('numbers.txt', 1000)
